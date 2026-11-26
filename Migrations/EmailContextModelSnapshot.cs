@@ -47,6 +47,9 @@ namespace MYAcademy_IdentityEmailProject.Migrations
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("LastCodeSentDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -90,6 +93,9 @@ namespace MYAcademy_IdentityEmailProject.Migrations
 
                     b.Property<int?>("ValidCode")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("ValidCodeExpireDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 

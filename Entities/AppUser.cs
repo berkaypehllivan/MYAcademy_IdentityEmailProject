@@ -9,4 +9,6 @@ public class AppUser : IdentityUser
     public string? ImageUrl { get; set; }
     public string? Description { get; set; }
     public int? ValidCode { get; set; }
+    public DateTime? ValidCodeExpireDate { get; set; }
+    public DateTime? LastCodeSentDate { get; set; }
 }

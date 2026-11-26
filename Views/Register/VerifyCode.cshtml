@@ -1,0 +1,477 @@
+﻿@model VerifyCodeViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-posta Doğrulama — Postane</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <style>
+            :root {
+                --app-bg: #F8FAFA;
+                --surface: #FFFFFF;
+                --sidebar-bg: #263238;
+                --sidebar-bg-2: #1E282D;
+                --border: #E2E8E8;
+                --text: #1F2937;
+                --text-muted: #64748B;
+                --on-sidebar: rgba(255, 255, 255, .82);
+                --on-sidebar-muted: rgba(255, 255, 255, .5);
+                --on-sidebar-faint: rgba(255, 255, 255, .09);
+                --primary: #0D9488;
+                --primary-strong: #0F766E;
+                --primary-rgb: 13, 148, 136;
+                --primary-soft: #CCFBF1;
+                --primary-tint: #F0FDFA;
+                --radius: 8px;
+                --radius-sm: 6px;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                margin: 0;
+                min-height: 100vh;
+                font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+                color: var(--text);
+                background: var(--surface);
+                -webkit-font-smoothing: antialiased;
+            }
+
+            a {
+                color: inherit;
+            }
+
+            .auth-shell {
+                display: grid;
+                grid-template-columns: minmax(360px, 42%) 1fr;
+                min-height: 100vh;
+            }
+
+            .auth-brand-panel {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                padding: 40px 48px;
+                background: linear-gradient(145deg, var(--sidebar-bg) 0%, var(--sidebar-bg-2) 100%);
+                color: var(--on-sidebar);
+                overflow: hidden;
+            }
+
+            .auth-brand {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .auth-brand-name {
+                font-size: 17px;
+                font-weight: 700;
+                letter-spacing: -0.02em;
+                line-height: 1.1;
+                color: #FFFFFF;
+            }
+
+            .auth-brand-tagline {
+                display: block;
+                font-size: 11px;
+                font-weight: 500;
+                color: var(--on-sidebar-muted);
+            }
+
+            .auth-brand-body {
+                max-width: 380px;
+            }
+
+            .auth-brand-heading {
+                margin: 0 0 12px;
+                font-size: 28px;
+                font-weight: 700;
+                line-height: 1.3;
+                letter-spacing: -0.01em;
+                color: #FFFFFF;
+            }
+
+            .auth-brand-sub {
+                margin: 0;
+                font-size: 14px;
+                line-height: 1.6;
+                color: var(--on-sidebar-muted);
+            }
+
+            .auth-feature-list {
+                list-style: none;
+                margin: 28px 0 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                gap: 14px;
+            }
+
+            .auth-feature {
+                display: flex;
+                align-items: flex-start;
+                gap: 12px;
+                font-size: 13px;
+                line-height: 1.4;
+                color: var(--on-sidebar);
+            }
+
+            .auth-feature i {
+                flex-shrink: 0;
+                width: 28px;
+                height: 28px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: var(--radius-sm);
+                background: var(--on-sidebar-faint);
+                color: var(--primary-soft);
+                font-size: 14px;
+            }
+
+            .auth-brand-footer {
+                font-size: 12px;
+                color: var(--on-sidebar-muted);
+            }
+
+            .auth-brand-footer a {
+                color: var(--on-sidebar);
+                text-decoration: underline;
+                text-underline-offset: 2px;
+            }
+
+            .auth-form-panel {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 40px 32px;
+            }
+
+            .auth-form-wrap {
+                width: 100%;
+                max-width: 360px;
+            }
+
+            .auth-heading {
+                margin: 0 0 6px;
+                font-size: 24px;
+                font-weight: 700;
+                letter-spacing: -0.01em;
+            }
+
+            .auth-subtext {
+                margin: 0 0 28px;
+                font-size: 14px;
+                color: var(--text-muted);
+            }
+
+            .auth-field {
+                margin-bottom: 16px;
+            }
+
+            .auth-field label {
+                display: block;
+                margin-bottom: 6px;
+                font-size: 13px;
+                font-weight: 600;
+                color: var(--text);
+            }
+
+            .auth-input-group {
+                position: relative;
+            }
+
+            .auth-input-group input {
+                width: 100%;
+                height: 44px;
+                padding: 0 14px;
+                border: 1px solid var(--border);
+                border-radius: var(--radius);
+                font-size: 20px;
+                letter-spacing: 6px;
+                text-align: center;
+                font-family: inherit;
+                color: var(--text);
+                background: var(--surface);
+                transition: border-color .15s, box-shadow .15s;
+            }
+
+            .auth-input-group input::placeholder {
+                color: #9CA7AF;
+                letter-spacing: normal;
+                font-size: 14px;
+            }
+
+            .auth-input-group input:focus {
+                outline: none;
+                border-color: var(--primary);
+                box-shadow: 0 0 0 3px rgba(var(--primary-rgb), .12);
+            }
+
+            .auth-field-error {
+                display: block;
+                margin-top: 6px;
+                font-size: 12.5px;
+                color: #DC2626;
+            }
+
+            .auth-validation-summary ul {
+                margin: 0 0 16px;
+                padding-left: 18px;
+                font-size: 13px;
+                color: #DC2626;
+            }
+
+            .auth-info-message {
+                margin: 0 0 16px;
+                padding: 10px 14px;
+                border-radius: var(--radius-sm);
+                background: var(--primary-tint);
+                color: var(--primary-strong);
+                font-size: 13px;
+            }
+
+            .btn-auth-primary {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 44px;
+                border: 0;
+                border-radius: var(--radius);
+                background: var(--primary);
+                color: #fff;
+                font-weight: 600;
+                font-size: 14px;
+                font-family: inherit;
+                transition: background-color .15s, transform .12s ease;
+            }
+
+            .btn-auth-primary:hover {
+                background: var(--primary-strong);
+                color: #fff;
+            }
+
+            .btn-auth-primary:active {
+                transform: scale(0.98);
+            }
+
+            .btn-auth-secondary {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 40px;
+                margin-top: 12px;
+                border: 1px solid var(--border);
+                border-radius: var(--radius);
+                background: var(--surface);
+                color: var(--text);
+                font-weight: 600;
+                font-size: 13px;
+                font-family: inherit;
+                transition: background-color .15s;
+            }
+
+            .btn-auth-secondary:hover:not(:disabled) {
+                background: var(--app-bg);
+            }
+
+            .btn-auth-secondary:disabled {
+                color: var(--text-muted);
+                cursor: not-allowed;
+            }
+
+            .auth-switch {
+                margin-top: 24px;
+                font-size: 13px;
+                color: var(--text-muted);
+                text-align: center;
+            }
+
+            .auth-switch a {
+                font-weight: 600;
+                color: var(--primary-strong);
+                text-decoration: none;
+            }
+
+            .auth-switch a:hover {
+                text-decoration: underline;
+            }
+
+            @@media (max-width: 991.98px) {
+                .auth-shell {
+                    display: block;
+                }
+
+                .auth-brand-panel {
+                    padding: 24px 28px;
+                }
+
+                .auth-brand-body,
+                .auth-feature-list,
+                .auth-brand-footer {
+                    display: none;
+                }
+
+                .auth-form-panel {
+                    padding: 36px 24px 48px;
+                }
+            }
+
+            @@media (max-width: 575.98px) {
+                .auth-brand-panel {
+                    padding: 20px 20px;
+                }
+
+                .auth-form-panel {
+                    padding: 28px 16px 40px;
+                }
+            }
+    </style>
+</head>
+
+<body>
+
+    <div class="auth-shell">
+
+        <!-- Sol: marka paneli -->
+        <aside class="auth-brand-panel">
+            <div class="auth-brand">
+                <svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
+                    <rect width="32" height="32" rx="8" style="fill: var(--primary);" />
+                    <rect x="7.5" y="10" width="17" height="12.5" rx="2" fill="none" stroke="#FFFFFF"
+                          stroke-width="1.8" />
+                    <path d="M8.5 11.5 L16 17 L23.5 11.5" fill="none" stroke="#FFFFFF" stroke-width="1.8"
+                          stroke-linecap="round" stroke-linejoin="round" />
+                    <circle cx="24.5" cy="9.5" r="3.5" style="fill: var(--primary-soft); stroke: var(--primary-strong);"
+                            stroke-width="1.5" />
+                </svg>
+                <div class="auth-brand-name">
+                    Postane
+                    <span class="auth-brand-tagline">Kurumsal E-posta</span>
+                </div>
+            </div>
+
+            <div class="auth-brand-body">
+                <h1 class="auth-brand-heading">Hesabınızı doğrulayın.</h1>
+                <p class="auth-brand-sub">Kurumsal e-posta adresinize gönderdiğimiz 6 haneli kodu girerek hesabınızı
+                    etkinleştirin.</p>
+
+                    <ul class="auth-feature-list">
+                        <li class="auth-feature">
+                            <i class="bi bi-shield-check"></i>
+                            <span>Kod yalnızca 3 dakika geçerlidir.</span>
+                        </li>
+                        <li class="auth-feature">
+                            <i class="bi bi-arrow-repeat"></i>
+                            <span>Ulaşmadıysa yeniden gönderebilirsiniz.</span>
+                        </li>
+                        <li class="auth-feature">
+                            <i class="bi bi-envelope-check"></i>
+                            <span>Doğrulama sonrası otomatik giriş yaparsınız.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="auth-brand-footer">
+                    Yardıma mı ihtiyacınız var? <a href="mailto:destek@postane.com">destek@postane.com</a>
+                </div>
+            </aside>
+
+            <!-- Sağ: form paneli -->
+            <main class="auth-form-panel">
+                <div class="auth-form-wrap">
+
+                    <h2 class="auth-heading">E-posta Doğrulama</h2>
+                    <p class="auth-subtext"><strong>@Model.Email</strong> adresine gönderilen 6 haneli kodu girin.</p>
+
+                    @if (TempData["Info"] != null)
+                    {
+                        <div class="auth-info-message">@TempData["Info"]</div>
+                    }
+
+                    <div asp-validation-summary="ModelOnly" class="auth-validation-summary"></div>
+
+                    @if (TempData["Error"] != null)
+                    {
+                        <div class="auth-validation-summary">
+                            <ul>
+                                <li>@TempData["Error"]</li>
+                            </ul>
+                        </div>
+                    }
+
+                    <form asp-controller="Register" asp-action="VerifyCode" method="post">
+                        <input type="hidden" asp-for="Email" />
+
+                        <div class="auth-field">
+                            <label asp-for="Code">Doğrulama Kodu</label>
+                            <div class="auth-input-group">
+                                <input asp-for="Code" class="form-control" placeholder="------" maxlength="6"
+                                       inputmode="numeric" autocomplete="one-time-code" autofocus>
+                            </div>
+                            <span asp-validation-for="Code" class="auth-field-error"></span>
+                        </div>
+
+                        <button type="submit" class="btn-auth-primary">Doğrula</button>
+                    </form>
+
+                    <form asp-controller="Register" asp-action="ResendCode" method="post">
+                        <input type="hidden" name="email" value="@Model.Email" />
+                        <button type="submit" id="resendButton" class="btn-auth-secondary"
+                                disabled="@(Model.ResendCooldown > 0)">
+                            Kodu Yeniden Gönder
+                        </button>
+                    </form>
+
+                    <p class="auth-switch">E-posta adresiniz yanlış mı? <a asp-controller="Register"
+                                                                               asp-action="SignUp">Kayda dönün</a></p>
+                    </div>
+                </main>
+
+            </div>
+
+            <script>
+                    (function () {
+                        const resendButton = document.getElementById('resendButton');
+                        let remaining = @Model.ResendCooldown;
+
+                        if (remaining > 0) {
+                            const originalText = resendButton.textContent.trim();
+
+                            const tick = () => {
+                                resendButton.textContent = `Yeniden gönder (${remaining}sn)`;
+                                remaining--;
+
+                                if (remaining < 0) {
+                                    resendButton.disabled = false;
+                                    resendButton.textContent = originalText;
+                                    clearInterval(timer);
+                                }
+                            };
+
+                            tick();
+                            const timer = setInterval(tick, 1000);
+                        }
+                    })();
+            </script>
+        </body>
+
+    </html>
