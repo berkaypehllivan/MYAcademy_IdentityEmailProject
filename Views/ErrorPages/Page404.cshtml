@@ -20,29 +20,28 @@
 
     <style>
             /* =========================================================
-               1. TEMA DEĞİŞKENLERİ  (diğer sayfalarla birebir aynı)
+               1. TEMA DEĞİŞKENLERİ  (diğer sayfalarla birebir aynı — Graphite/Teal)
                ========================================================= */
             :root {
-                --app-bg: #F6F4EF;
+                --app-bg: #F8FAFA;
                 --surface: #FFFFFF;
-                --surface-soft: #FBFAF7;
+                --surface-soft: #F8FAFA;
 
-                --border: #E3DED3;
-                --border-soft: #EEEAE2;
+                --border: #E2E8E8;
+                --border-soft: #EDF1F1;
 
-                --text: #2A2925;
-                --text-2: #4F4C45;
-                --text-muted: #8A857B;
+                --text: #1F2937;
+                --text-2: #374151;
+                --text-muted: #64748B;
 
-                --sage: #9DBBA4;
-                --sage-strong: #4D7A5B;
-                --sage-hover: #436C50;
-                --sage-soft: #E1ECE3;
-                --sage-tint: #F1F6F2;
+                --primary: #0D9488;
+                --primary-strong: #0F766E;
+                --primary-rgb: 13, 148, 136;
+                --primary-soft: #CCFBF1;
+                --primary-tint: #F0FDFA;
 
-                --peach: #F0C9AE;
-                --peach-strong: #B2643A;
-                --peach-soft: #FBEADF;
+                /* Büyük hata kodu rakamları için soluk, dekoratif ton */
+                --error-code-color: #9FD4CC;
 
                 --radius: 8px;
                 --radius-sm: 6px;
@@ -74,7 +73,7 @@
                 padding: 28px 40px;
             }
 
-            /* Logo (diğer sayfalardaki ile aynı) */
+            /* Logo (diğer sayfalardaki ile aynı — renkler tema değişkenlerinden) */
             .brand {
                 display: inline-flex;
                 align-items: center;
@@ -108,7 +107,7 @@
                 text-align: center;
             }
 
-            /* "4 ✉ 4" görseli */
+            /* "4 ✉ 4" görseli — orta rakam ikonla değişiyor */
             .error-code {
                 display: flex;
                 align-items: center;
@@ -118,7 +117,7 @@
                 font-weight: 700;
                 line-height: 1;
                 letter-spacing: -0.04em;
-                color: #CFE0D3;
+                color: var(--error-code-color);
                 user-select: none;
             }
             .error-code-icon {
@@ -127,10 +126,10 @@
                 justify-content: center;
                 width: 84px;
                 height: 84px;
-                border: 1px solid #CFE0D3;
+                border: 1px solid var(--error-code-color);
                 border-radius: 50%;
                 background: var(--surface);
-                color: var(--sage-strong);
+                color: var(--primary-strong);
                 font-size: 34px;
             }
 
@@ -139,8 +138,8 @@
                 margin-bottom: 12px;
                 padding: 3px 10px;
                 border-radius: 4px;
-                background: var(--sage-soft);
-                color: var(--sage-strong);
+                background: var(--primary-soft);
+                color: var(--primary-strong);
                 font-size: 12px;
                 font-weight: 600;
             }
@@ -180,23 +179,23 @@
             }
             .btn-primary-app {
                 border: 0;
-                background: var(--sage-strong);
+                background: var(--primary);
                 color: #fff;
                 font-weight: 600;
             }
-            .btn-primary-app:hover { background: var(--sage-hover); color: #fff; }
+            .btn-primary-app:hover { background: var(--primary-strong); color: #fff; }
             .btn-outline-app {
                 border: 1px solid var(--border);
                 background: var(--surface);
                 color: var(--text-2);
                 font-weight: 500;
             }
-            .btn-outline-app:hover { background: var(--surface-soft); border-color: #D3CDC1; color: var(--text); }
+            .btn-outline-app:hover { background: var(--app-bg); border-color: #CBD5E1; color: var(--text); }
             .btn-outline-app i { color: var(--text-muted); }
             .btn-primary-app:focus-visible,
             .btn-outline-app:focus-visible {
                 outline: none;
-                box-shadow: 0 0 0 3px var(--app-bg), 0 0 0 5px var(--sage);
+                box-shadow: 0 0 0 3px var(--app-bg), 0 0 0 5px var(--primary);
             }
 
             .back-link {
@@ -249,9 +248,9 @@
                 color: var(--text-2);
                 transition: border-color .15s, color .15s;
             }
-            .helpful-list a:hover { border-color: var(--sage); color: var(--sage-strong); }
+            .helpful-list a:hover { border-color: var(--primary); color: var(--primary-strong); }
             .helpful-list i { color: var(--text-muted); }
-            .helpful-list a:hover i { color: var(--sage-strong); }
+            .helpful-list a:hover i { color: var(--primary-strong); }
 
             .error-footer {
                 text-align: center;
@@ -285,10 +284,10 @@
 
         <a href="#" class="brand" aria-label="Postane ana sayfa">
             <svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
-                <rect width="32" height="32" rx="8" fill="#4D7A5B" />
+                <rect width="32" height="32" rx="8" style="fill: var(--primary);" />
                 <rect x="7.5" y="10" width="17" height="12.5" rx="2" fill="none" stroke="#FFFFFF" stroke-width="1.8" />
                 <path d="M8.5 11.5 L16 17 L23.5 11.5" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-                <circle cx="24.5" cy="9.5" r="3.5" fill="#F0C9AE" stroke="#4D7A5B" stroke-width="1.5" />
+                <circle cx="24.5" cy="9.5" r="3.5" style="fill: var(--primary-soft); stroke: var(--primary-strong);" stroke-width="1.5" />
             </svg>
             <span class="brand-name">
                 Postane

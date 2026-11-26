@@ -30,18 +30,37 @@
             document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => new bootstrap.Tooltip(el));
 
 
-            /* ---------- 1. Sidebar aç / kapat ---------- */
-            document.getElementById('sidebarToggle').addEventListener('click', function () {
-                if (window.innerWidth < 992) {
-                    document.body.classList.toggle('sidebar-open');      // mobil: üstte açılır
-                } else {
-                    document.body.classList.toggle('sidebar-collapsed'); // masaüstü: gizlenir
-                }
-            });
+/* ---------- 1. Sidebar aç / kapat ---------- */
+const sidebarToggleBtn = document.getElementById('sidebarToggle');
 
-            document.getElementById('sidebarBackdrop').addEventListener('click', function () {
-                document.body.classList.remove('sidebar-open');
-            });
+function syncSidebarToggleState() {
+    const isMobile = window.innerWidth < 992;
+    const isOpen = isMobile
+        ? document.body.classList.contains('sidebar-open')       // mobil: açıkken eklenir
+        : !document.body.classList.contains('sidebar-collapsed'); // masaüstü: kapalıyken eklenir
+
+    sidebarToggleBtn.classList.toggle('is-active', isOpen);
+    sidebarToggleBtn.setAttribute('aria-pressed', String(isOpen));
+    sidebarToggleBtn.querySelector('i').className = isOpen
+        ? 'bi bi-layout-sidebar'
+        : 'bi bi-layout-sidebar-inset';
+}
+
+sidebarToggleBtn.addEventListener('click', function () {
+    if (window.innerWidth < 992) {
+        document.body.classList.toggle('sidebar-open');      // mobil: üstte açılır
+    } else {
+        document.body.classList.toggle('sidebar-collapsed'); // masaüstü: gizlenir
+    }
+    syncSidebarToggleState();
+});
+
+document.getElementById('sidebarBackdrop').addEventListener('click', function () {
+    document.body.classList.remove('sidebar-open');
+    syncSidebarToggleState();
+});
+
+syncSidebarToggleState(); // sayfa yüklenince başlangıç durumunu ayarla
 
 
             /* ---------- 2. Sayaçları güncelle ---------- */

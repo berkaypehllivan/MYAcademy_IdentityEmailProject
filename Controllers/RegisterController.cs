@@ -58,7 +58,7 @@ public class RegisterController : Controller
 
             SmtpClient smtpClient = new SmtpClient();
             smtpClient.Connect("smtp.gmail.com", 587, false);
-            smtpClient.Authenticate("pehlivanberkay74@gmail.com", "fvym qzrc trzw ybxr");
+            smtpClient.Authenticate("mail", "kod");
             smtpClient.Send(mimeMessage);
             smtpClient.Disconnect(true);
 

@@ -1,12 +1,12 @@
 ﻿<aside class="app-sidebar" id="appSidebar">
 
     <div class="sidebar-brand">
-        <!-- Logo: zarf + bildirim noktası -->
+        <!-- Logo: zarf + bildirim noktası (renkler tema değişkenlerinden geliyor) -->
         <svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
-            <rect width="32" height="32" rx="8" fill="#4D7A5B" />
+            <rect width="32" height="32" rx="8" style="fill: var(--primary);" />
             <rect x="7.5" y="10" width="17" height="12.5" rx="2" fill="none" stroke="#FFFFFF" stroke-width="1.8" />
             <path d="M8.5 11.5 L16 17 L23.5 11.5" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-            <circle cx="24.5" cy="9.5" r="3.5" fill="#F0C9AE" stroke="#4D7A5B" stroke-width="1.5" />
+            <circle cx="24.5" cy="9.5" r="3.5" style="fill: var(--primary-soft); stroke: var(--primary-strong);" stroke-width="1.5" />
         </svg>
         <div class="sidebar-brand-name">
             Postane
@@ -21,12 +21,12 @@
         </a>
     </div>
 
-    <nav class="sidebar-nav">
+    <nav class="sidebar-nav" aria-label="Ana gezinme">
         <div class="sidebar-heading">Ana Menü</div>
         <ul class="sidebar-menu">
             <li><a href="#" class="sidebar-link"><i class="bi bi-grid"></i>Dashboard</a></li>
             <li>
-                <a href="#" class="sidebar-link active">
+                <a href="#" class="sidebar-link active" aria-current="page">
                     <i class="bi bi-inbox"></i>Gelen Kutusu
                     <span class="sidebar-count" id="sidebarUnreadCount">4</span>
                 </a>
