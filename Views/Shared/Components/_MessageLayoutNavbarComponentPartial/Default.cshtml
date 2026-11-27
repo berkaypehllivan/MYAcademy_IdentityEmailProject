@@ -9,11 +9,13 @@
     </form>
 
     <div class="navbar-actions">
-        <button type="button" class="icon-btn" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Bildirimler" aria-label="Bildirimler">
+        <button type="button" class="icon-btn" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                data-bs-title="Bildirimler" aria-label="Bildirimler">
             <i class="bi bi-bell"></i>
             <span class="notify-dot"></span>
         </button>
-        <button type="button" class="icon-btn" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Yardım" aria-label="Yardım">
+        <button type="button" class="icon-btn" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                data-bs-title="Yardım" aria-label="Yardım">
             <i class="bi bi-question-circle"></i>
         </button>
 
@@ -35,8 +37,14 @@
                 </li>
                 <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i>Profilim</a></li>
                 <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i>Ayarlar</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item item-logout" href="#"><i class="bi bi-box-arrow-right"></i>Çıkış Yap</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                
+
+                <form asp-controller="Login" asp-action="SignOut" method="post">
+                    <button class="dropdown-item item-logout"><i class="bi bi-box-arrow-right">Çıkış Yap</i></button>
+                </form>
             </ul>
         </div>
     </div>
