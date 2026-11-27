@@ -4,6 +4,7 @@
 
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,8 +21,8 @@
 
     <style>
             /* =========================================================
-               1. TEMA DEĞİŞKENLERİ  (diğer sayfalarla birebir aynı — Graphite/Teal)
-               ========================================================= */
+                   1. TEMA DEĞİŞKENLERİ  (diğer sayfalarla birebir aynı — Graphite/Teal)
+                   ========================================================= */
             :root {
                 --app-bg: #F8FAFA;
                 --surface: #FFFFFF;
@@ -47,9 +48,11 @@
             }
 
             /* =========================================================
-               2. GENEL
-               ========================================================= */
-            * { box-sizing: border-box; }
+                   2. GENEL
+                   ========================================================= */
+            * {
+                box-sizing: border-box;
+            }
 
             body {
                 margin: 0;
@@ -60,11 +63,14 @@
                 -webkit-font-smoothing: antialiased;
             }
 
-            a { color: inherit; text-decoration: none; }
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
 
             /* =========================================================
-               3. SAYFA YERLEŞİMİ
-               ========================================================= */
+                   3. SAYFA YERLEŞİMİ
+                   ========================================================= */
             .error-page {
                 display: flex;
                 flex-direction: column;
@@ -78,12 +84,14 @@
                 gap: 10px;
                 align-self: flex-start;
             }
+
             .brand-name {
                 font-size: 17px;
                 font-weight: 700;
                 letter-spacing: -0.02em;
                 line-height: 1.1;
             }
+
             .brand-tagline {
                 display: block;
                 font-size: 11px;
@@ -118,6 +126,7 @@
                 color: var(--error-code-color);
                 user-select: none;
             }
+
             .error-code-icon {
                 display: inline-flex;
                 align-items: center;
@@ -141,12 +150,14 @@
                 font-size: 12px;
                 font-weight: 600;
             }
+
             .error-title {
                 margin: 0;
                 font-size: 24px;
                 font-weight: 700;
                 letter-spacing: -0.02em;
             }
+
             .error-text {
                 margin: 10px 0 0;
                 font-size: 15px;
@@ -161,6 +172,7 @@
                 gap: 10px;
                 margin-top: 28px;
             }
+
             .btn-primary-app,
             .btn-outline-app {
                 display: inline-flex;
@@ -174,21 +186,36 @@
                 white-space: nowrap;
                 transition: background-color .15s, border-color .15s, color .15s;
             }
+
             .btn-primary-app {
                 border: 0;
                 background: var(--primary);
                 color: #fff;
                 font-weight: 600;
             }
-            .btn-primary-app:hover { background: var(--primary-strong); color: #fff; }
+
+            .btn-primary-app:hover {
+                background: var(--primary-strong);
+                color: #fff;
+            }
+
             .btn-outline-app {
                 border: 1px solid var(--border);
                 background: var(--surface);
                 color: var(--text-2);
                 font-weight: 500;
             }
-            .btn-outline-app:hover { background: var(--app-bg); border-color: #CBD5E1; color: var(--text); }
-            .btn-outline-app i { color: var(--text-muted); }
+
+            .btn-outline-app:hover {
+                background: var(--app-bg);
+                border-color: #CBD5E1;
+                color: var(--text);
+            }
+
+            .btn-outline-app i {
+                color: var(--text-muted);
+            }
+
             .btn-primary-app:focus-visible,
             .btn-outline-app:focus-visible {
                 outline: none;
@@ -207,7 +234,10 @@
                 font-weight: 500;
                 color: var(--text-muted);
             }
-            .back-link:hover { color: var(--text); }
+
+            .back-link:hover {
+                color: var(--text);
+            }
 
             .helpful-links {
                 width: 100%;
@@ -215,6 +245,7 @@
                 padding-top: 20px;
                 border-top: 1px solid var(--border);
             }
+
             .helpful-title {
                 margin: 0 0 12px;
                 font-size: 12px;
@@ -223,6 +254,7 @@
                 text-transform: uppercase;
                 color: var(--text-muted);
             }
+
             .helpful-list {
                 display: flex;
                 flex-wrap: wrap;
@@ -232,6 +264,7 @@
                 padding: 0;
                 list-style: none;
             }
+
             .helpful-list a {
                 display: inline-flex;
                 align-items: center;
@@ -244,9 +277,19 @@
                 color: var(--text-2);
                 transition: border-color .15s, color .15s;
             }
-            .helpful-list a:hover { border-color: var(--primary); color: var(--primary-strong); }
-            .helpful-list i { color: var(--text-muted); }
-            .helpful-list a:hover i { color: var(--primary-strong); }
+
+            .helpful-list a:hover {
+                border-color: var(--primary);
+                color: var(--primary-strong);
+            }
+
+            .helpful-list i {
+                color: var(--text-muted);
+            }
+
+            .helpful-list a:hover i {
+                color: var(--primary-strong);
+            }
 
             .error-footer {
                 text-align: center;
@@ -255,20 +298,49 @@
             }
 
             /* =========================================================
-               4. RESPONSIVE
-               ========================================================= */
+                   4. RESPONSIVE
+                   ========================================================= */
             @@media (max-width: 575.98px) {
-                .error-page { padding: 20px 16px; }
-                .error-content { padding: 32px 0; }
-                .error-code { font-size: 64px; gap: 10px; margin-bottom: 22px; }
-                .error-code-icon { width: 62px; height: 62px; font-size: 26px; }
-                .error-title { font-size: 20px; }
-                .error-text { font-size: 14px; }
-                .error-actions { flex-direction: column; width: 100%; }
-                .error-actions a { width: 100%; }
+                .error-page {
+                    padding: 20px 16px;
+                }
+
+                .error-content {
+                    padding: 32px 0;
+                }
+
+                .error-code {
+                    font-size: 64px;
+                    gap: 10px;
+                    margin-bottom: 22px;
+                }
+
+                .error-code-icon {
+                    width: 62px;
+                    height: 62px;
+                    font-size: 26px;
+                }
+
+                .error-title {
+                    font-size: 20px;
+                }
+
+                .error-text {
+                    font-size: 14px;
+                }
+
+                .error-actions {
+                    flex-direction: column;
+                    width: 100%;
+                }
+
+                .error-actions a {
+                    width: 100%;
+                }
             }
     </style>
 </head>
+
 <body>
 
     <!--
@@ -282,8 +354,10 @@
             <svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
                 <rect width="32" height="32" rx="8" style="fill: var(--primary);" />
                 <rect x="7.5" y="10" width="17" height="12.5" rx="2" fill="none" stroke="#FFFFFF" stroke-width="1.8" />
-                <path d="M8.5 11.5 L16 17 L23.5 11.5" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-                <circle cx="24.5" cy="9.5" r="3.5" style="fill: var(--primary-soft); stroke: var(--primary-strong);" stroke-width="1.5" />
+                <path d="M8.5 11.5 L16 17 L23.5 11.5" fill="none" stroke="#FFFFFF" stroke-width="1.8"
+                      stroke-linecap="round" stroke-linejoin="round" />
+                <circle cx="24.5" cy="9.5" r="3.5" style="fill: var(--primary-soft); stroke: var(--primary-strong);"
+                        stroke-width="1.5" />
             </svg>
             <span class="brand-name">
                 Postane
@@ -307,8 +381,8 @@
             </p>
 
             <div class="error-actions">
-                <!-- MVC'de: asp-controller="Account" asp-action="Login" -->
-                <a href="#" class="btn-primary-app">
+                <a asp-controller="Login" asp-action="SignIn" asp-route-returnUrl="@ViewData["ReturnUrl"]"
+                   class="btn-primary-app">
                     <i class="bi bi-box-arrow-in-right"></i>
                     Giriş Yap
                 </a>
@@ -318,11 +392,6 @@
                     Yardım Al
                 </a>
             </div>
-
-            <button type="button" class="back-link" id="backButton">
-                <i class="bi bi-arrow-left"></i>
-                Önceki sayfaya dön
-            </button>
 
             <nav class="helpful-links" aria-labelledby="helpfulTitle">
                 <h2 class="helpful-title" id="helpfulTitle">Şunlar işinize yarayabilir</h2>
@@ -348,4 +417,5 @@
             }
     </script>
 </body>
+
 </html>

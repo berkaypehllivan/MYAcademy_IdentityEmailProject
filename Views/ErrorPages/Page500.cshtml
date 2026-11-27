@@ -1,0 +1,370 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunucu Hatası — Postane</title>
+
+    <!-- Yazı tipi: Inter (Türkçe karakter desteği için latin-ext dahil) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5 ve Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <style>
+            /* =========================================================
+               1. TEMA DEĞİŞKENLERİ  (diğer sayfalarla birebir aynı — Graphite/Teal)
+               ========================================================= */
+            :root {
+                --app-bg: #F8FAFA;
+                --surface: #FFFFFF;
+                --surface-soft: #F8FAFA;
+
+                --border: #E2E8E8;
+                --border-soft: #EDF1F1;
+
+                --text: #1F2937;
+                --text-2: #374151;
+                --text-muted: #64748B;
+
+                --primary: #0D9488;
+                --primary-strong: #0F766E;
+                --primary-rgb: 13, 148, 136;
+                --primary-soft: #CCFBF1;
+                --primary-tint: #F0FDFA;
+
+                --error-code-color: #9FD4CC;
+
+                --radius: 8px;
+                --radius-sm: 6px;
+            }
+
+            /* =========================================================
+               2. GENEL
+               ========================================================= */
+            * { box-sizing: border-box; }
+
+            body {
+                margin: 0;
+                font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+                font-size: 14px;
+                color: var(--text);
+                background: var(--app-bg);
+                -webkit-font-smoothing: antialiased;
+            }
+
+            a { color: inherit; text-decoration: none; }
+
+            /* =========================================================
+               3. SAYFA YERLEŞİMİ
+               ========================================================= */
+            .error-page {
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+                padding: 28px 40px;
+            }
+
+            .brand {
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                align-self: flex-start;
+            }
+            .brand-name {
+                font-size: 17px;
+                font-weight: 700;
+                letter-spacing: -0.02em;
+                line-height: 1.1;
+            }
+            .brand-tagline {
+                display: block;
+                font-size: 11px;
+                font-weight: 500;
+                color: var(--text-muted);
+                letter-spacing: 0;
+            }
+
+            .error-content {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                max-width: 520px;
+                margin: 0 auto;
+                padding: 48px 0;
+                text-align: center;
+            }
+
+            /* "5 ⚠ 0" görseli — orta rakam ikonla değişiyor */
+            .error-code {
+                display: flex;
+                align-items: center;
+                gap: 14px;
+                margin-bottom: 28px;
+                font-size: 88px;
+                font-weight: 700;
+                line-height: 1;
+                letter-spacing: -0.04em;
+                color: var(--error-code-color);
+                user-select: none;
+            }
+            .error-code-icon {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 84px;
+                height: 84px;
+                border: 1px solid var(--error-code-color);
+                border-radius: 50%;
+                background: var(--surface);
+                color: var(--primary-strong);
+                font-size: 34px;
+            }
+
+            .error-label {
+                display: inline-block;
+                margin-bottom: 12px;
+                padding: 3px 10px;
+                border-radius: 4px;
+                background: var(--primary-soft);
+                color: var(--primary-strong);
+                font-size: 12px;
+                font-weight: 600;
+            }
+            .error-title {
+                margin: 0;
+                font-size: 24px;
+                font-weight: 700;
+                letter-spacing: -0.02em;
+            }
+            .error-text {
+                margin: 10px 0 0;
+                font-size: 15px;
+                line-height: 1.6;
+                color: var(--text-2);
+            }
+
+            .error-actions {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+                margin-top: 28px;
+            }
+            .btn-primary-app,
+            .btn-outline-app {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                height: 40px;
+                padding: 0 18px;
+                border-radius: var(--radius);
+                font-size: 14px;
+                white-space: nowrap;
+                transition: background-color .15s, border-color .15s, color .15s;
+            }
+            .btn-primary-app {
+                border: 0;
+                background: var(--primary);
+                color: #fff;
+                font-weight: 600;
+                cursor: pointer;
+            }
+            .btn-primary-app:hover { background: var(--primary-strong); color: #fff; }
+            .btn-outline-app {
+                border: 1px solid var(--border);
+                background: var(--surface);
+                color: var(--text-2);
+                font-weight: 500;
+            }
+            .btn-outline-app:hover { background: var(--app-bg); border-color: #CBD5E1; color: var(--text); }
+            .btn-outline-app i { color: var(--text-muted); }
+            .btn-primary-app:focus-visible,
+            .btn-outline-app:focus-visible {
+                outline: none;
+                box-shadow: 0 0 0 3px var(--app-bg), 0 0 0 5px var(--primary);
+            }
+
+            .back-link {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                margin-top: 16px;
+                padding: 0;
+                border: 0;
+                background: none;
+                font-size: 13px;
+                font-weight: 500;
+                color: var(--text-muted);
+            }
+            .back-link:hover { color: var(--text); }
+
+            .helpful-links {
+                width: 100%;
+                margin-top: 40px;
+                padding-top: 20px;
+                border-top: 1px solid var(--border);
+            }
+            .helpful-title {
+                margin: 0 0 12px;
+                font-size: 12px;
+                font-weight: 600;
+                letter-spacing: .06em;
+                text-transform: uppercase;
+                color: var(--text-muted);
+            }
+            .helpful-list {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+            .helpful-list a {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                padding: 6px 12px;
+                border: 1px solid var(--border-soft);
+                border-radius: var(--radius-sm);
+                background: var(--surface);
+                font-size: 13px;
+                color: var(--text-2);
+                transition: border-color .15s, color .15s;
+            }
+            .helpful-list a:hover { border-color: var(--primary); color: var(--primary-strong); }
+            .helpful-list i { color: var(--text-muted); }
+            .helpful-list a:hover i { color: var(--primary-strong); }
+
+            .error-footer {
+                text-align: center;
+                font-size: 12px;
+                color: var(--text-muted);
+            }
+
+            .error-ref {
+                margin-top: 10px;
+                font-size: 11px;
+                color: var(--text-muted);
+            }
+            .error-ref code {
+                padding: 1px 6px;
+                border-radius: 4px;
+                background: var(--app-bg);
+                border: 1px solid var(--border-soft);
+                color: var(--text-2);
+                font-size: 11px;
+            }
+
+            /* =========================================================
+               4. RESPONSIVE
+               ========================================================= */
+            @@media (max-width: 575.98px) {
+                .error-page { padding: 20px 16px; }
+                .error-content { padding: 32px 0; }
+                .error-code { font-size: 64px; gap: 10px; margin-bottom: 22px; }
+                .error-code-icon { width: 62px; height: 62px; font-size: 26px; }
+                .error-title { font-size: 20px; }
+                .error-text { font-size: 14px; }
+                .error-actions { flex-direction: column; width: 100%; }
+                .error-actions a { width: 100%; }
+            }
+    </style>
+</head>
+<body>
+
+    <!--
+        Error/ServerError.cshtml  (sidebar ve navbar yok)
+        MVC'de bu sayfa örneğin app.UseExceptionHandler("/Error/ServerError")
+        veya app.UseStatusCodePagesWithReExecute("/Error/{0}") ile 500 durumunda gösterilebilir.
+    -->
+    <div class="error-page">
+
+        <a href="#" class="brand" aria-label="Postane ana sayfa">
+            <svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
+                <rect width="32" height="32" rx="8" style="fill: var(--primary);" />
+                <rect x="7.5" y="10" width="17" height="12.5" rx="2" fill="none" stroke="#FFFFFF" stroke-width="1.8" />
+                <path d="M8.5 11.5 L16 17 L23.5 11.5" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                <circle cx="24.5" cy="9.5" r="3.5" style="fill: var(--primary-soft); stroke: var(--primary-strong);" stroke-width="1.5" />
+            </svg>
+            <span class="brand-name">
+                Postane
+                <span class="brand-tagline">Kurumsal E-posta</span>
+            </span>
+        </a>
+
+        <main class="error-content">
+
+            <div class="error-code" aria-hidden="true">
+                <span>5</span>
+                <span class="error-code-icon"><i class="bi bi-exclamation-triangle"></i></span>
+                <span>0</span>
+            </div>
+
+            <span class="error-label">Hata 500</span>
+            <h1 class="error-title">Beklenmedik bir hata oluştu</h1>
+            <p class="error-text">
+                Sunucumuzda teknik bir sorun oluştu. Ekibimiz otomatik olarak bilgilendirildi,
+                lütfen birkaç dakika sonra tekrar deneyin.
+            </p>
+
+            <div class="error-actions">
+                <button type="button" class="btn-primary-app" id="reloadButton">
+                    <i class="bi bi-arrow-clockwise"></i>
+                    Sayfayı Yenile
+                </button>
+                <!-- MVC'de: asp-controller="Message" asp-action="Inbox" -->
+                <a href="#" class="btn-outline-app">
+                    <i class="bi bi-inbox"></i>
+                    Gelen Kutusuna Dön
+                </a>
+            </div>
+
+            <button type="button" class="back-link" id="backButton">
+                <i class="bi bi-arrow-left"></i>
+                Önceki sayfaya dön
+            </button>
+
+            <!-- Varsa istek/izleme kimliğini burada gösterebilirsiniz, örn: @Model?.RequestId -->
+            <p class="error-ref">Sorunu bildirirken bu kodu paylaşmanız çözümü hızlandırır: <code>#REQ-000000</code></p>
+
+            <nav class="helpful-links" aria-labelledby="helpfulTitle">
+                <h2 class="helpful-title" id="helpfulTitle">Şunlar işinize yarayabilir</h2>
+                <ul class="helpful-list">
+                    <li><a href="#"><i class="bi bi-question-circle"></i>Yardım</a></li>
+                    <li><a href="#"><i class="bi bi-life-preserver"></i>Destek Talebi</a></li>
+                    <li><a href="#"><i class="bi bi-activity"></i>Durum Sayfası</a></li>
+                    <li><a href="#"><i class="bi bi-grid"></i>Dashboard'a Git</a></li>
+                </ul>
+            </nav>
+        </main>
+
+        <p class="error-footer mb-0">© 2026 Postane · Kurumsal E-posta Yönetim Sistemi</p>
+    </div>
+
+    <script>
+            const backButton = document.getElementById('backButton');
+
+            if (window.history.length > 1) {
+                backButton.addEventListener('click', () => window.history.back());
+            } else {
+                backButton.hidden = true;
+            }
+
+            document.getElementById('reloadButton').addEventListener('click', () => window.location.reload());
+    </script>
+</body>
+</html>

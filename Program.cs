@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using MYAcademy_IdentityEmailProject.Context;
 using MYAcademy_IdentityEmailProject.Entities;
 using MYAcademy_IdentityEmailProject.Services;
@@ -11,13 +12,39 @@ builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<E
 builder.Services.AddControllersWithViews();
 builder.Services.Configure<MailSettings>(builder.Configuration.GetSection("MailSettings"));
 
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add(new AuthorizeFilter());
+});
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Lockout.MaxFailedAccessAttempts = 5;
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+    options.Lockout.AllowedForNewUsers = true;
+
+    options.SignIn.RequireConfirmedEmail = true;
+});
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Login/SignIn";
+    options.AccessDeniedPath = "/ErrorPages/Page403";
+
+    options.Events.OnRedirectToLogin = context =>
+    {
+        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+        return Task.CompletedTask;
+    };
+});
+
 builder.Services.AddScoped<IEmailService, EmailService>();
 
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
+    app.UseExceptionHandler("/ErrorPages/Page500");
     app.UseHsts();
 }
 
